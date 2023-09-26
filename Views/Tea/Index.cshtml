@@ -1,5 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Tea Page";
+    @model List<GetTeaDto>
+    ViewData["Title"] = "My Menu";
     int counter = 1;
 }
 
@@ -10,27 +11,73 @@
                 <th>No</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Price</th>
                 <th>#</th>
             </thead>
 
             <tbody>
-                @foreach(var str in ViewBag.Teas)
+                @foreach(var tea in Model)
                 {
-                    <td>@counter</td>
-                    <td>@Html.Raw(str.Name)</td>
-                    <td>@Html.Raw(str.Description)</td>
-                    <td>
-                        <button class="btn btn-sm mb-2 btn-primary">Edit</button>
-                        <button class="btn btn-sm btn-danger">Delete</button>
-                    </td>
+                    <tr>
+                        <td>@counter</td>
+                        <td>@Html.Raw(tea.Name)</td>
+                        <td>@Html.Raw(tea.Description)</td>
+                        <td>@Html.Raw(tea.Price)</td>
+                        <td>
+                            <button onclick="setTea({
+                                Id: @tea.Id,
+                                Description: '@tea.Description',
+                                Name: '@tea.Name',
+                                Price: @tea.Price,
+                                DrinkType: '@Utils.GetDrinkTypeName(tea.DrinkType.ToString()!)',
+                            })" class="btn btn-sm mb-2 btn-primary">Edit</button>
+                            <button onclick="deleteTea(@tea.Id)" class="btn btn-sm btn-danger">Delete</button>
+                        </td>
+                    </tr>
                     counter++;
                 }
             </tbody>
         </table>
-        
     </div>
     
     <div class="col-4">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur maxime molestiae blanditiis quod, iure quae enim laborum minus ea placeat culpa excepturi quis impedit eius voluptatum doloribus at aliquid optio!
+        <div class="card">
+            <div class="card-body">
+                <form id="add-tea-form">
+                    <input hidden type="text" name="Tea-Id">
+                    <div class="form-group mb-3">
+                        <label for="tea-name">Name</label>
+                        <input required name="Tea-Name" id="tea-name" type="text" class="form-control form-control-sm" placeholder="Tea Name">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="tea-description">Description</label>
+                        <textarea required placeholder="Tea Description" name="Tea-Description" class="form-control form-control-sm" id="tea-description" cols="30" rows="3"></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group mb-3">
+                                <label for="tea-price">Price</label>
+                                <input required name="Tea-Price" type="number" class="form-control form-control-sm" id="tea-price" placeholder="Tea Price">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group mb-3">
+                                <label for="tea-type">Type</label>
+                                <select required name="Tea-DrinkType" class="form-control form-control-sm" id="tea-type">
+                                    <option value="0">Cold</option>
+                                    <option value="1">Hot</option>
+                                    <option value="2">Normal</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="unselect()" id="unselect-tea-button" type="button" class="d-none btn btn-sm btn-danger">Unselect</button>
+                    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

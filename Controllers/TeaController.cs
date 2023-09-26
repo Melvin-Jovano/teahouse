@@ -22,19 +22,21 @@ namespace teahouse.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var teas = await _teaService.GetAllTeas();
-            ViewBag.Teas = teas;
-            return View();
+            return View(await _teaService.GetAllTeas());
         }
 
-        // [HttpGet("{id}")]
-        // public async Task<ActionResult<ServiceResponse<GetTeaDto>>> GetTea(int id) {
-        //     return Ok(await _teaService.GetTea(id));
-        // }
+        [HttpPost]
+        public async Task<ActionResult<ServiceResponse<GetTeaDto>>> AddTea(AddTeaDto tea) {
+            return Ok(await _teaService.AddTea(tea));
+        }
 
-        // [HttpPost]
-        // public async Task<ActionResult<ServiceResponse<GetTeaDto>>> AddTea(AddTeaDto tea) {
-        //     return Ok(await _teaService.AddTea(tea));
-        // }
+        [HttpDelete]
+        public async Task<ActionResult<ServiceResponse<GetTeaDto>>> DeleteTea(int id) {
+            return Ok(await _teaService.DeleteTea(id));
+        }
+        [HttpPut]
+        public async Task<ActionResult<ServiceResponse<GetTeaDto>>> UpdateTea(UpdateTeaDto tea) {
+            return Ok(await _teaService.UpdateTea(tea));
+        }
     }
 }

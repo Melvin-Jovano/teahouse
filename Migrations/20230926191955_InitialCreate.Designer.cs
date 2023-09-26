@@ -11,8 +11,8 @@ using teahouse.Data;
 namespace teahouse.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230926105250_InitialSetup")]
-    partial class InitialSetup
+    [Migration("20230926191955_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,9 +50,6 @@ namespace teahouse.Migrations
                     b.Property<int>("Experience")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Img")
-                        .HasColumnType("text");
-
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -68,9 +65,6 @@ namespace teahouse.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Img")
-                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -125,9 +119,6 @@ namespace teahouse.Migrations
 
                     b.Property<int?>("DrinkType")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Img")
-                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");

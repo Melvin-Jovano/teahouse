@@ -2,6 +2,7 @@ global using teahouse.Services.TeaService;
 global using Microsoft.EntityFrameworkCore;
 global using teahouse.Data;
 global using teahouse.Dtos.Tea;
+global using teahouse.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 

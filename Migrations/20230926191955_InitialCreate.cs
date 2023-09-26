@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace teahouse.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialSetup : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,6 @@ namespace teahouse.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    Img = table.Column<string>(type: "text", nullable: true),
                     Experience = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -33,7 +32,6 @@ namespace teahouse.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    Img = table.Column<string>(type: "text", nullable: true),
                     Stock = table.Column<int>(type: "integer", nullable: false),
                     Price = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -49,7 +47,6 @@ namespace teahouse.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    Img = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     DrinkType = table.Column<int>(type: "integer", nullable: true),
                     Price = table.Column<int>(type: "integer", nullable: false)
