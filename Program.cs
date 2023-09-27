@@ -2,7 +2,9 @@ global using teahouse.Services.TeaService;
 global using Microsoft.EntityFrameworkCore;
 global using teahouse.Data;
 global using teahouse.Dtos.Tea;
+global using teahouse.Dtos.Ingredient;
 global using teahouse.Utils;
+using teahouse.Services.IngredientService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ builder.Services.AddDbContext<DataContext>(options => {
 });
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ITeaService, TeaService>();
+builder.Services.AddScoped<IIngredientService, IngredientService>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

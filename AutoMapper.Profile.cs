@@ -1,5 +1,4 @@
 using AutoMapper;
-using teahouse.Dtos.Tea;
 using teahouse.Models;
 
 namespace teahouse {
@@ -7,6 +6,9 @@ namespace teahouse {
         public AutoMapperProfile() {
             CreateMap<Tea, GetTeaDto>();
             CreateMap<AddTeaDto, Tea>();
+
+            CreateMap<Ingredient, GetIngredientDto>();
+            CreateMap<AddIngredientDto, Ingredient>();
         }
     }
 }

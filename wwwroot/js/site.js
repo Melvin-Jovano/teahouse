@@ -88,3 +88,22 @@ function updateTea() {
         }
     });
 }
+
+function buyIngredient(id, stock) {
+    const formData = {
+        Id: id,
+        Stock: stock
+    };
+
+    $.ajax({
+        url: `/Ingredient/BuyIngredient`,
+        type: "PUT",
+        data: formData,
+        success: function (result) {
+            location.reload();
+        },
+        error: function (error) {
+            alert('Error');
+        }
+    });
+}
