@@ -1,0 +1,79 @@
+﻿@{
+    @model List<GetRecipeDto>
+    ViewData["Title"] = "Cook Book";
+    int counter = 1;
+}
+
+<div class="row">
+    <div class="col-8">
+        <table class="table table-hover">
+            <thead>
+                <th>No</th>
+                <th>Tea</th>
+                <th>Ingredient</th>
+                <th>Quantity</th>
+                <th>#</th>
+            </thead>
+
+            <tbody>
+                @foreach(var recipe in Model)
+                {
+                    <tr>
+                        <td>@counter</td>
+                        <td>@Html.Raw(recipe.Tea.Name)</td>
+                        <td>@Html.Raw(recipe.Ingredient.Name)</td>
+                        <td>@Html.Raw(recipe.Quantity)</td>
+                        <td>
+                            <button onclick="setRecipe({
+                                Id: @recipe.Id,
+                                TeaId: @recipe.TeaId,
+                                IngredientId: @recipe.IngredientId,
+                                Quantity: @recipe.Quantity,
+                            })" class="btn btn-sm mb-2 btn-primary">Edit</button>
+                            <button onclick="deleteRecipe(@recipe.Id)" class="btn mb-2 btn-sm btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                    counter++;
+                }
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <form onsubmit="addRecipe(event)">
+                    <input hidden type="text" name="Recipe-Id">
+
+                    <div class="form-group mb-3">
+                        <label for="recipe-tea">Tea</label>
+                        <select required name="Recipe-TeaId" class="form-control form-control-sm" id="recipe-tea">
+                            @foreach(var tea in ViewBag.AllTeas) 
+                            {
+                                <option value="@tea.Id">@tea.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="recipe-ingredient">Ingredient</label>
+                        <select required name="Recipe-IngredientId" class="form-control form-control-sm" id="recipe-ingredient">
+                            @foreach(var ingredient in ViewBag.AllIngredients) 
+                            {
+                                <option value="@ingredient.Id">@ingredient.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="recipe-quantity">Quantity Of Ingredient</label>
+                        <input required name="Recipe-Quantity" type="number" class="form-control form-control-sm" id="recipe-quantity" placeholder="How many does it take?" min="0">
+                    </div>
+
+                    <button onclick="unselectRecipe()" id="unselect-recipe-button" type="button" class="d-none btn btn-sm btn-danger">Unselect</button>
+                    <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

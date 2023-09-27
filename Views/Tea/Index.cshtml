@@ -1,6 +1,6 @@
 ﻿@{
     @model List<GetTeaDto>
-    ViewData["Title"] = "My Menu";
+    ViewData["Title"] = "Menu";
     int counter = 1;
 }
 
@@ -31,7 +31,7 @@
                                 Price: @tea.Price,
                                 DrinkType: '@Utils.GetDrinkTypeName(tea.DrinkType.ToString()!)',
                             })" class="btn btn-sm mb-2 btn-primary">Edit</button>
-                            <button onclick="deleteTea(@tea.Id)" class="btn btn-sm btn-danger">Delete</button>
+                            <button onclick="deleteTea(@tea.Id)" class="btn mb-2 btn-sm btn-danger">Delete</button>
                         </td>
                     </tr>
                     counter++;
@@ -43,7 +43,7 @@
     <div class="col-4">
         <div class="card">
             <div class="card-body">
-                <form id="add-tea-form">
+                <form onsubmit="addTea(event)">
                     <input hidden type="text" name="Tea-Id">
                     <div class="form-group mb-3">
                         <label for="tea-name">Name</label>
@@ -74,7 +74,7 @@
                         </div>
                     </div>
 
-                    <button onclick="unselect()" id="unselect-tea-button" type="button" class="d-none btn btn-sm btn-danger">Unselect</button>
+                    <button onclick="unselectTea()" id="unselect-tea-button" type="button" class="d-none btn btn-sm btn-danger">Unselect</button>
                     <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                 </form>
             </div>

@@ -9,6 +9,6 @@ namespace teahouse.Dtos.Ingredient {
         public string? Name { get; set; }
         public int Stock { get; set; }
         public int Price { get; set; }
-        public ICollection<Recipe> Recipes { get; } = new List<Recipe>();
+        public ICollection<Models.Recipe> Recipes { get; } = new List<Models.Recipe>();
     }
 }

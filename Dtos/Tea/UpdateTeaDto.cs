@@ -12,7 +12,7 @@ namespace teahouse.Dtos.Tea {
         public string? Description { get; set; }
         public DrinkType? DrinkType { get; set; }
         public int Price { get; set; }
-        public ICollection<Recipe> Recipes {get; set;} = new List<Recipe>();
+        public ICollection<Models.Recipe> Recipes {get; set;} = new List<Models.Recipe>();
         public List<Bartender> Bartenders { get; } = new();
     }
 }
