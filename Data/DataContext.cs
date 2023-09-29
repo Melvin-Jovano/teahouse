@@ -8,6 +8,7 @@ using teahouse.Models;
 namespace teahouse.Data {
     public class DataContext : DbContext {
         public DbSet<Tea> Teas => Set<Tea>();
+        public DbSet<User> Users => Set<User>();
         public DbSet<Bartender> Bartenders => Set<Bartender>();
         public DbSet<Ingredient> Ingredients => Set<Ingredient>();
         public DbSet<Recipe> Recipes => Set<Recipe>();
@@ -21,6 +22,10 @@ namespace teahouse.Data {
                 .HasMany(t => t.Bartenders)
                 .WithMany(b => b.Teas)
                 .UsingEntity(j => j.ToTable("BartenderTea"));
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
         }
         public DataContext(DbContextOptions<DataContext> options) : base(options) {
             
