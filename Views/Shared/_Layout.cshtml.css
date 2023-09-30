@@ -11,6 +11,14 @@ a {
   color: #0077cc;
 }
 
+nav {
+  background-color: #1D1C1A;
+}
+
+footer {
+  background-color: #1D1C1A;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -21,13 +29,6 @@ a {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {

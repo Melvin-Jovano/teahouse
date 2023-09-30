@@ -60,6 +60,15 @@ namespace teahouse.Services.TeaService {
             }
         }
 
+        public async Task<ServiceResponse<List<GetTeaDto>>> GetAllTea() {
+            try {
+                var teas = await _context.Teas.Include(x => x.Bartenders).ToListAsync();
+                return new ServiceResponse<List<GetTeaDto>>(Data: teas.Select(c => _mapper.Map<GetTeaDto>(c)).ToList());
+            } catch (System.Exception) {
+                return new ServiceResponse<List<GetTeaDto>>(Message: ServiceResponseEnum.Error);
+            }
+        }
+
         public async Task<ServiceResponse<GetTeaDto>> GetTea(int id) {
             try {
                 var tea = await _context.Teas.FirstOrDefaultAsync(t => t.Id == id);

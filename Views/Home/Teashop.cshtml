@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Cafe Opened";
+}
+
+<style scoped>
+    .receipt {
+        background: url('/img/paper.png') no-repeat;
+        background-size: 100% 100%;
+
+    }
+</style>
+
+<div class="row">
+    <div class="col-5 position-relative">
+        <div class="receipt h-100">
+            <div id="log" class="position-absolute h-68 overflow-auto" style="top:80px;left:65px;right:65px"></div>
+        </div>
+    </div>
+
+    <div class="col-7">
+        <img class="w-100" height="500" src="~/img/cat.gif" alt="">
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let counter = 0;
+        $('#log').html('');
+
+        function start() {
+            $.ajax({
+                url: `/Tea/GetAllTea`,
+                type: "GET",
+                success: function (result) {
+                    pickMenu(result.data);
+                },
+                error: function (error) {
+                    alert('Error');
+                }
+            });
+        }
+
+        function pickMenu(teas) {
+            let time = getRandomNumber(3, 6);
+            const selectedTea = randomFromArray(teas);
+            $('#log').append(`${getRandomName()} ordered ${selectedTea.name} - ${getRandomAction()} <span id='log-${counter}'>${time}s</span> <img id='badge-${counter}' width='20' src='/img/brew.gif' /><br>`);
+            const interval = setInterval(makeTea, 1000);
+
+            function makeTea() {
+                $(`#log-${counter}`).text(`${time}s`);
+                time--;
+                if(time == -1) {
+                    clearInterval(interval);
+                    $(`#badge-${counter}`).attr('src', '/img/check.png');
+                    start();
+                    counter++;
+                }
+            }
+        }
+
+
+        start();
+    });
+</script>

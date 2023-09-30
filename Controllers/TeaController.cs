@@ -18,9 +18,12 @@ namespace teahouse.Controllers {
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
-        {
+        public async Task<IActionResult> Index() {
             return View(await _teaService.GetAllTeas());
+        }
+
+        public async Task<ActionResult<ServiceResponse<GetTeaDto>>> GetAllTea() {
+            return Ok(await _teaService.GetAllTea());
         }
 
         [HttpPost]

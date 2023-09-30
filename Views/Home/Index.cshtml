@@ -1,8 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Lobby";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="position-relative">
+    <img class="w-100 opacity-50" height="650" src="~/img/teahouse.webp" alt="">
+    <div class="position-absolute text-center" style="left:0;right:0;top:30vh">
+        <h2 class="text-white mb-3">Customers Are Waiting...</h2>
+        <a target="_blank" asp-area="" asp-action="Teashop" asp-controller="Home" class="btn opacity-100 btn-lg btn-success">Open Teahouse!</a>
+    </div>
 </div>

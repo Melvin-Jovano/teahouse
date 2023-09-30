@@ -28,12 +28,12 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 </head>
-<body>
+<body class="bg-dark">
     @if(!(Context.Request.Path.StartsWithSegments("/Auth/Login") || Context.Request.Path.StartsWithSegments("/Auth/Register"))) {
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
                 <div class="container-fluid">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">
                         <img width="40" src="~/img/logo.png" alt="" srcset="">
                         Lobby
                     </a>
@@ -44,13 +44,13 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Tea" asp-action="Index">Menu</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Tea" asp-action="Index">Menu</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Ingredient" asp-action="Index">Warehouse</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Ingredient" asp-action="Index">Warehouse</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Recipe" asp-action="Index">Cook Book</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Recipe" asp-action="Index">Cook Book</a>
                             </li>
                             <li class="nav-item">
                                 <button class="nav-link text-danger btn btn-sm" onclick="logout()">Logout</button>
@@ -61,15 +61,32 @@
             </nav>
         </header>
     }
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
+    
+    @if(Context.Request.Path == "/") {
+        <div>
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+    } else {
         <div class="container">
-            &copy; 2023 - Teahouse - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    }
+
+    <footer class="footer text-muted">
+        <div class="container text-white">
+            <div class="row">
+                <div class="col-6">
+                     Teahouse - Made With &hearts; Using <a href="https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-7.0" target="_blank" rel="noopener noreferrer">ASP.NET</a>
+                </div>
+
+                <div class="col-6 text-end">
+                    <a target="_blank" href="https://github.com/Melvin-Jovano/teahouse"><img width="20" src="~/img/github-mark-white.png" alt="" srcset=""></a> 
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
