@@ -5,18 +5,18 @@
 <div class="row mt-5">
     <div class="col-4"></div>
     <div class="col-4">
-        <form>
+        <form onsubmit="login(event)">
             <center>
                 <img class="" src="~/img/logo.png" alt="">
             </center>
             <h1>Welcome Manager,</h1>
             <div class="form-outline mb-4">
-                <input autocomplete="off" type="email" id="username" class="form-control form-control-sm" />
+                <input required type="text" id="username" name="username" class="form-control form-control-sm" />
                 <label class="form-label" for="username">Username</label>
             </div>
 
             <div class="form-outline mb-4">
-                <input type="password" id="password" class="form-control form-control-sm" />
+                <input required type="password" id="password" name="password" class="form-control form-control-sm" />
                 <label class="form-label" for="password">Password</label>
             </div>
 
@@ -39,5 +39,31 @@
 </div>
 
 <script>
-    
+    function login(e) {
+        e.preventDefault();
+
+        const formData = {
+            Username: $('input[name="username"]').val(),
+            Password: $('input[name="password"]').val()
+        };
+
+        $.ajax({
+            url: `/Auth/LoginUser`,
+            type: "POST",
+            data: formData,
+            success: function (result) {
+                if(result.message == 'InvalidInput') {
+                    alert('Password not correct');
+                    return;
+                } else if(result.message == 'Error') {
+                    alert('Username not found');
+                    return;
+                }
+                location.href = '/';
+            },
+            error: function (error) {
+                alert('Error');
+            }
+        });
+    }
 </script>

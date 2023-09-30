@@ -5,23 +5,23 @@
 <div class="row mt-4">
     <div class="col-4"></div>
     <div class="col-4">
-        <form>
+        <form onsubmit="register(event)">
             <center>
                 <img class="" src="~/img/logo.png" alt="">
             </center>
             <h1>Hello Rookie,</h1>
             <div class="form-outline mb-4">
-                <input type="email" id="username" class="form-control form-control-sm" />
+                <input autocomplete="off" required name="username" type="text" id="username" class="form-control form-control-sm" />
                 <label class="form-label" for="username">Username</label>
             </div>
 
             <div class="form-outline mb-4">
-                <input type="password" id="password" class="form-control form-control-sm" />
+                <input type="password" required id="password" name="password" class="form-control form-control-sm" />
                 <label class="form-label" for="password">Password</label>
             </div>
 
             <div class="form-outline mb-4">
-                <input type="password" id="repeat-password" class="form-control form-control-sm" />
+                <input required type="password" id="repeat-password" name="repeat-password" class="form-control form-control-sm" />
                 <label class="form-label" for="repeat-password">Repeat Password</label>
             </div>
 
@@ -33,3 +33,37 @@
         </form>
     </div>
 </div>
+
+<script>
+    function register(e) {
+        e.preventDefault();
+
+        const Password = $('input[name="password"]').val();
+        
+        if(Password != $('input[name="repeat-password"]').val()) {
+            alert('Password isnt match');
+            return;
+        }
+
+        const formData = {
+            Username: $('input[name="username"]').val(),
+            Password
+        };
+
+        $.ajax({
+            url: `/Auth/RegisterUser`,
+            type: "POST",
+            data: formData,
+            success: function (result) {
+                if(result.message == 'DataAlreadyExist') {
+                    alert('Username Already Registered');
+                    return;
+                }
+                location.href = '/Auth/Login';
+            },
+            error: function (error) {
+                alert('Error');
+            }
+        });
+    }
+</script>

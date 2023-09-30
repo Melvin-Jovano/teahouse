@@ -12,6 +12,9 @@ namespace teahouse {
 
             CreateMap<Recipe, GetRecipeDto>();
             CreateMap<AddRecipeDto, Recipe>();
+
+            CreateMap<User, GetUserDto>();
+            CreateMap<RegisterDto, User>();
         }
     }
 }
