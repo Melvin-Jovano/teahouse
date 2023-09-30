@@ -7,10 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using teahouse.Models;
 
-namespace teahouse.Controllers
-{
-    public class TeaController : Controller
-    {
+namespace teahouse.Controllers {
+    public class TeaController : Controller {
         private readonly ILogger<TeaController> _logger;
         private readonly ITeaService _teaService;
 

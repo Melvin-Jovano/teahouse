@@ -34,7 +34,6 @@ namespace teahouse.Services.AuthService {
 
         public async Task<ServiceResponse<GetUserDto>> Login(LoginDto userCredentials) {
             try {
-                Console.WriteLine(userCredentials.Username);
                 var user = await _context.Users.Where(u => u.Username == userCredentials.Username).FirstOrDefaultAsync();
                 if(user == null) {
                     return new ServiceResponse<GetUserDto>(Message: ServiceResponseEnum.DataNotFound);
@@ -42,7 +41,7 @@ namespace teahouse.Services.AuthService {
 
                 var passwordHasher = new PasswordHasher<User>();
                 var result = passwordHasher.VerifyHashedPassword(user, user.Password, userCredentials.Password);
-                Console.Write(result);
+
                 if (result != PasswordVerificationResult.Success) {
                     return new ServiceResponse<GetUserDto>(Message: ServiceResponseEnum.InvalidInput);
                 }

@@ -1,6 +1,7 @@
 global using teahouse.Services.TeaService;
 global using Microsoft.EntityFrameworkCore;
 global using teahouse.Data;
+global using teahouse.Middlewares;
 global using teahouse.Dtos.Tea;
 global using teahouse.Dtos.Auth;
 global using teahouse.Dtos.Recipe;
@@ -22,6 +23,7 @@ builder.Services.AddScoped<ITeaService, TeaService>();
 builder.Services.AddScoped<IIngredientService, IngredientService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddSession();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
@@ -34,7 +36,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();
@@ -42,5 +44,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseMiddleware<SessionValidationMiddleware>();
 
 app.Run();

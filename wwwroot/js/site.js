@@ -1,5 +1,14 @@
 ﻿function logout() {
     if(confirm('Logout?')) {
-        alert('logouted');
+        $.ajax({
+            url: `/Auth/LogoutUser`,
+            type: "DELETE",
+            success: function (result) {
+                location.href = '/Auth/Login';
+            },
+            error: function (error) {
+                alert('Error');
+            }
+        });
     }
 }

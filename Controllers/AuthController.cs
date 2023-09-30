@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using teahouse.Models;
 using teahouse.Services.AuthService;
@@ -31,6 +32,18 @@ public class AuthController : Controller
 
     [HttpPost]
     public async Task<ActionResult<ServiceResponse<GetUserDto>>> LoginUser(LoginDto userCreds) {
-        return Ok(await _authService.Login(userCreds));
+        var result = await _authService.Login(userCreds);
+
+        if(result.Message == ServiceResponseEnum.Success) {
+            HttpContext.Session.SetInt32("UserId", result.Data!.Id);
+        }
+
+        return Ok(result);
+    }
+
+    [HttpDelete]
+    public ActionResult<ServiceResponse<bool>> LogoutUser() {
+        HttpContext.Session.Clear();
+        return Ok(new ServiceResponse<bool>(Data: true));
     }
 }
